@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
-import "./App.css";
-import { Routes, Route, Link } from "react-router-dom";
-import { FilmList } from "./FilmList/FilmsList";
-import { FilmDetails } from "./FilmDetails";
-import { CharacterDetails } from "./CharacterDetails";
-import logo from './images/logo/Star-Wars-Emblem.png'
+import React, { useEffect, useState } from 'react';
 import './App.css';
+import { Routes, Route, Link } from 'react-router-dom';
+import { FilmList } from './FilmList/FilmsList';
+import { FilmDetails } from './FilmDetails';
+import { CharacterDetails } from './CharacterDetails';
+import logo from './images/logo/Star-Wars-Emblem.png';
+import './App.css';
+import { getFilms } from './servises/getFilms';
 
 function App() {
   const [filmsList, setFilmsList] = useState([]);
@@ -21,27 +22,35 @@ function App() {
     setFilmDetail(params);
   }
 
+  const starFilms = async () => {
+    const film = await getFilms();
+    setFilmsList(film);
+  };
+
   useEffect(() => {
-    fetch(`https://swapi.dev/api/films/`)
-      .then((response) => response.json())
-      .then((data) => {
-        setFilmsList(data.results);
-      });
+    starFilms();
+    // fetch(`https://swapi.dev/api/films/`)
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     setFilmsList(data.results);
+    //   });
   }, []);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <Link to="/"><img className="logo" src={logo} alt="starWars" ></img></Link>
+    <div className='App'>
+      <header className='App-header'>
+        <Link to='/'>
+          <img className='logo' src={logo} alt='starWars'></img>
+        </Link>
       </header>
       <main>
         <Routes>
           <Route
-            path="/"
+            path='/'
             element={<FilmList filmsListData={filmsList} saveId={saveId} />}
           />
           <Route
-            path="/film_details"
+            path='/films/:id'
             element={
               <FilmDetails
                 filmsListData={filmsList}
@@ -51,7 +60,7 @@ function App() {
             }
           />
           <Route
-            path="/character_details"
+            path='/character_details'
             element={
               <CharacterDetails
                 filmsListData={filmsList}
