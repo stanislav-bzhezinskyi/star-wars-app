@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import "./FilmList.css";
-import aNewHope from "../images/film_posters/a_new_hope.jpg";
+// import aNewHope from "../images/film_posters/a_new_hope.jpg";
 
 export const FilmList = (props) => {
   function getId(event) {
@@ -17,7 +17,7 @@ export const FilmList = (props) => {
             onClick={getId}
             className="film_li"
           >
-            <div className="film_title">{film.title}</div>
+            {film.title}
           </Link>
 
           <br />

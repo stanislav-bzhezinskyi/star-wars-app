@@ -3,10 +3,7 @@ import { Link } from "react-router-dom";
 
 export const FilmDetails = (props) => {
   const [characterInfo, setCharacterInfo] = useState([]);
-
-  const filmInfo = props.filmsListData.filter(
-    (film) => film.episode_id === +props.saveId
-  );
+  const filmInfo = props.filmsListData.filter((film) => film.episode_id === +props.saveId);
 
   useEffect(() => {
     for (let character of filmInfo[0].characters) {
@@ -16,7 +13,7 @@ export const FilmDetails = (props) => {
           setCharacterInfo((prevArray) => [...prevArray, data]);
         });
     }
-  });
+  }, []);
 
   function infoAboutCharacter(event) {
     props.aboutCharacter(event.target.name, characterInfo);
@@ -25,7 +22,7 @@ export const FilmDetails = (props) => {
   return (
     <div>
       <h1>{filmInfo[0].title}</h1>
-      <p>episode number: {filmInfo[0].episode_id}</p> <br />
+      <p className="paragraph">episode number: {filmInfo[0].episode_id}</p> <br />
       <p>{filmInfo[0].opening_crawl}</p>
       <p>director: {filmInfo[0].director}</p>
       <ul>

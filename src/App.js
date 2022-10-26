@@ -8,7 +8,6 @@ import logo from './images/logo/Star-Wars-Emblem.png'
 import './App.css';
 
 function App() {
-  const [type, setType] = useState("films");
   const [filmsList, setFilmsList] = useState([]);
   const [filmDetail, setFilmDetail] = useState();
   const [character, setCharacter] = useState();
@@ -23,12 +22,12 @@ function App() {
   }
 
   useEffect(() => {
-    fetch(`https://swapi.dev/api/${type}/`)
+    fetch(`https://swapi.dev/api/films/`)
       .then((response) => response.json())
       .then((data) => {
         setFilmsList(data.results);
       });
-  }, [type]);
+  }, []);
 
   return (
     <div className="App">
