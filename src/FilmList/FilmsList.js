@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import "./FilmList.css";
+import { Link } from 'react-router-dom';
+import './FilmList.css';
 // import aNewHope from "../images/film_posters/a_new_hope.jpg";
 
 export const FilmList = (props) => {
@@ -8,14 +8,14 @@ export const FilmList = (props) => {
   }
 
   return (
-    <ul className="film_list">
+    <ul className='film_list'>
       {props.filmsListData.map((film) => (
-        <li key={film.episode_id} className="list_item">
+        <li key={film.episode_id} className='list_item'>
           <Link
-            to="/film_details"
+            to={`/films/${film.episode_id}`}
             id={film.episode_id}
             onClick={getId}
-            className="film_li"
+            className='film_li'
           >
             {film.title}
           </Link>
